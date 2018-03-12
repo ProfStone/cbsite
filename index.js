@@ -13,7 +13,7 @@ app.use(exp.static(path.join(__dirname, 'public')));
 app.use(exp.static(path.join(__dirname, 'images')));
 
 app.get('/', function (req,res) {
-    res.render('index', {title: "Hello", h1: "Home page" });
+    res.render('index', { title: "Hello", h1: "Charlottesville Area Bahá'ís" });
 });
 
 app.get('/about', function (req, res) {
