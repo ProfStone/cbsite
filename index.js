@@ -1,6 +1,6 @@
 // home page of the charlottesville bahais website
 const exp = require('express');
-
+var bodyParser = require('body-parser');
 var path = require('path');
 var port = 3000;
 
@@ -12,8 +12,19 @@ app.set('view engine','pug');
 app.use(exp.static(path.join(__dirname, 'public')));
 app.use(exp.static(path.join(__dirname, 'images')));
 
+// needed for parsing form variables
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var cassandra = require('cassandra-driver');
+var client = new cassandra.Client({contactPoints:['localhost']});
+/*client.execute('select key from system.local', function (err, result)  {
+    if (err)  throw err;
+    console.log(result.rows[0]);})*/
+
+// ROUTES
+
 app.get('/', function (req,res) {
-    res.render('index', { title: "Hello", h1: "Charlottesville Area Bahá'ís" });
+    res.render('index', { title: "Hello", h1: "Charlottesville Area Bahï¿½'ï¿½s" });
 });
 
 app.get('/about', function (req, res) {
@@ -24,8 +35,60 @@ app.get('/contact', function (req, res) {
     res.render('contact', { title: "Contact", h1: "Contact" });
 });
 
+app.post('/contact', function (req, res) {
+    // make sure we have the required fields and send a contact message
+    if (req.body.email.length > 0 &&
+        req.body.key == 2 &&
+        req.body.message.length > 0 )
+    {
+    
+        var nodemailer =require('nodemailer');
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'cvilletraininginstitute@gmail.com',
+                pass: 'Perserver@nce'
+            }
+        });
+        var mailOptions = {
+            from: 'cvilletraininginstitute@gmail.com',
+            to: req.body.email,
+            subject: 'Contact form filled out',
+            text: req.body.message
+        };
+        //STUB : exaping single quotes?
+        //save this in a database record
+        client.execute('insert into contact ( fromaddress, message, fromdatetime ) VALUES \
+        ( \''+req.body.email+'\', \''+req.body.message+'\' )', function (err, result)  {
+            if (err)  throw err;
+            console.log(result.rows[0]);})
+        // and why does this take so long to run?
+        transporter.sendMail(mailOptions,function(error,info) {
+            if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+              }
+        })
+    } // end user input check
+})
+
 app.get('/events', function (req, res) {
-    res.render('events', { title: "Events", h1: "Events" });
+    var today = new Date();
+    var twoWeeks = new Date();
+    twoWeeks.setDate(today.getDate()+14); // will this work on new months?
+    client.execute ('select title, location, startdatetime, duration, eventdetails \
+        from cb.event where startdatetime > \''+today.toISOString()+'\' and startdatetime < \''+ twoWeeks.toISOString() +'\' \
+         ALLOW FILTERING', function (err, result)  {
+        if (err) { 
+            console.log("Database throws an error."); 
+            console.log(err); 
+            res.render('error', { title: "Error Page", h1: "Sad Clown" });
+        } else {
+        res.render('events', { title: "Events", h1: "Events", eventdata: result });
+        }
+    });
+    
 });
 
 app.get('/editevents', function (req, res) {
@@ -36,7 +99,7 @@ app.get('/subscribe', function (req, res) {
     res.render('subscribe', { title: "Subscribe", h1: "Subscribe" });
 });
 app.post('/subscribe', function (req, res) {
-    // do somethign with the posted values here, either thank them for subscribing
+    // do something with the posted values here, either thank them for subscribing
     if (true) { 
         res.render('subscribed', { title: "Subscribe", h1: "Subscribed" });
     // or thank them for unsubscribing

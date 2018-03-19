@@ -1,20 +1,43 @@
-<main role="main" class="container">
 
-      <div class="starter-template">
-      <p>Messages sent using this form go to the local Bah&aacute;'&iacute;s.</p>
-        <p class="lead">
-            <form name="contactform" method="post" action="/contact" enctype="application/x-www-form-urlencoded">
-                <label for="email">Your Email</label>
-                <input id="email" type="text" name="email" />
-                <br />
-                <label for="message">Message</label>
-                <textarea id="message" name="message"></textarea>
-                <br />
-                <input type="submit" name="Contact" value="Contact" />
-            </form>
-            </form>
-
-        </p>
-      </div>
-
-    </main><!-- /.container -->
+    <div class="starter-template">
+    <p>Messages sent using this form go to the local Bah&aacute;'&iacute;s.</p>
+    <p class="lead">
+        <form name="contactform" method="post" action="/contact" enctype="application/x-www-form-urlencoded">
+            <table>
+                <tr>
+                    <Td>
+                        <label for="email">Your Email</label>
+                    </Td>
+                    <td>
+                        <input id="email" type="text" name="email" size="25" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       <label for="message">Message</label> 
+                    </td>
+                    <td>
+                        <textarea id="message" name="message" rows="4" cols="60"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="key">Help us stay safe from robots!<br />What is 1+1?</label>
+                    </td>
+                    <td>
+                        <input id="key" type="text" name="key" size="3"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &NonBreakingSpace;
+                    </td>
+                    <td>
+                        <input type="submit" name="Contact" value="Contact" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </p>
+    </div>
+   <!-- /.container -->

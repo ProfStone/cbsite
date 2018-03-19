@@ -3,8 +3,9 @@ html
     include includes/head.pug
     
     body
-        include includes/nav.html        
-        h1= h1
+        include includes/nav.html   
         include banner.pug
-        include content/about.html
+        main(role='main',class='container')
+            h1= h1
+            include content/about.html
         include includes/foot.pug
