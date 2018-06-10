@@ -1,0 +1,11 @@
+todo list
+better photos
+about text
+add captcha to contact form
+
+
+
+create keyspace cb with replication = { 'class':'SimpleStrategy','replication_factor':3};
+create table cb.usr ( email text PRIMARY KEY, firstname text, lastname text, notices text );
+create table cb.event ( eventid uuid PRIMARY KEY, title text, location text, startdatetime timestamp, duration int, eventdetails text, creator text, createtime timestamp );
+create table cb.contact ( fromaddress text, message text, sentdatetime timestamp PRIMARY KEY );

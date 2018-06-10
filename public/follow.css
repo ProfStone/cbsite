@@ -1,4 +1,98 @@
-﻿ul.contact
+﻿#footer-wrapper
+	{
+		overflow: hidden;
+		padding: 5em 0em;
+		background: #1E1B1A;
+	}
+
+	#footer
+	{
+		color: #ADADAD;
+	}
+	
+	#footer .title h2
+	{
+		font-weight: 400;
+		font-size: 1.2em;
+		color: #FFF;
+	}
+
+	#footer .title
+	{
+		border-color: #2D2926 !important;
+	}
+	
+	#footer .style1 li
+	{
+		border-color: #2D2926 !important;
+	}
+	
+	#footer .style1 a
+	{
+		font-size:1em;
+		color: #B1B1B1;
+	}
+	
+	#box1
+	{
+		float: left;
+		width: 354px;
+		margin-right: 24px;
+		padding-right: 30px;
+	}
+	
+	#box2
+	{
+		float: left;
+		width: 354px;
+		margin-left: 24px;
+		padding-right: 30px;
+	}
+	
+	#box3
+	{
+		float: right;
+		width: 344px;
+		padding-left: 40px;
+	}
+	ul.style1
+	{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	ul.style1 li
+	{
+		border-top: solid 1px #E5E5E5;
+		padding: 0.80em 0;
+	}
+	
+	ul.style1 li:first-child
+	{
+		border-top: 0;
+		padding-top: 0;
+	}
+
+	ul.style2
+	{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	ul.style2 li
+	{
+		border-top: solid 1px #E5E5E5;
+		padding: 0.80em 0;
+	}
+	
+	ul.style2 li:first-child
+	{
+		border-top: 0;
+		padding-top: 0;
+	}
+	ul.contact
 	{
 		margin: 0;
 		padding: 1.5em 0em 2.5em 0em;
