@@ -130,7 +130,7 @@ app.get('/confirm/:key', function (req,res) {
                 console.log(result);
                 if (result.length) {
                     console.log("running update for "+result[0].email);
-                    client.execute ('update cb.subscriber set confirmed=\'true\' where email = \''+ result[0].email +'\' IF EXISTS', 
+                    client.execute ('update cb.subscriber set confirmed=True where email = \''+ result[0].email +'\' IF EXISTS', 
                     function (err,result2) {
                         if (err) {
                             console.log("Database throws an error."); 
